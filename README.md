@@ -3,7 +3,7 @@
 ![Menu](menu.png)
 
 
-
+## 🖥️ install 
 
 ## 🐧 linux
 ```bash 
@@ -17,6 +17,7 @@ git clone https://github.com/banaxou/infonyx
 cd infonyx
 start windows.bat
 ```
+** termux soon/1.2**
 ##  🟠 start 
 ```python
 python infonyx.py
