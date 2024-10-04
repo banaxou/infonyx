@@ -4,7 +4,7 @@
 
 
 ## 🖥️ install python
-- 🐍 ![python](https://www.python.org/downloads/)
+- 🐍 !**https://www.python.org/downloads/**
 
 ## 🐧 linux
 ```bash 
@@ -32,5 +32,5 @@ python infonyx.py
 - 🛠️ Search for email details and use the Holehe tool
 - ![holehe](https://github.com/megadose/holehe)
 - ![ignorant](https://github.com/megadose/ignorant)
-- #**update soon !**
+- # **update soon !**
 - **termux soon/1.2**
