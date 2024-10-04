@@ -4,7 +4,7 @@
 
 
 ## 🖥️ install python
-- 🐍 !**https://www.python.org/downloads/**
+- 🐍 **https://www.python.org/downloads/**
 
 ## 🐧 linux
 ```bash 
