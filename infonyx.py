@@ -2,27 +2,42 @@ import os
 import time
 import fade
 import requests
+import socket
 import phonenumbers
 from phonenumbers import carrier, geocoder, timezone
 
 def ip_info():
     RED = "\033[91m"
     RESET = "\033[0m"
-    ipl = input("[+] enter ip: ")
+    ipl = input("[+] Enter IP: ")
+
     url = requests.get(f"https://ipinfo.io/{ipl}/json").json()
     not_f = "not found"
     not_fo = fade.purplepink(not_f)
-    pip = ["IP:", "city:", "region:", "loc:", "country:", "postal:", "ISP:"]
+    pip = ["IP:", "City:", "Region:", "Location:", "Country:", "Postal:", "ISP:", "Open Ports:"]
+    keys = ["ip", "city", "region", "loc", "country", "postal", "org"]
+
     width = 50
 
     print(f"╔{'═' * width}╗")
-    print(f"{RED}{pip[0]}{RESET} {url.get('ip', not_fo)}")
-    print(f"{RED}{pip[1]}{RESET} {url.get('city', not_fo)}")
-    print(f"{RED}{pip[2]}{RESET} {url.get('region', not_fo)}")
-    print(f"{RED}{pip[3]}{RESET} {url.get('loc', not_fo)}")
-    print(f"{RED}{pip[4]}{RESET} {url.get('country', not_fo)}")
-    print(f"{RED}{pip[5]}{RESET} {url.get('postal', not_fo)}")
-    print(f"{RED}{pip[6]}{RESET} {url.get('org', not_fo)}")
+    open_p = []
+    port_r = range(0, 65535) 
+
+    for port in port_r:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(1)  
+            result = sock.connect_ex((ipl, port))  
+            if result == 0:  
+                open_p.append(port)
+
+
+    open_pd = ', '.join(map(str, open_p)) if open_p else "None"
+
+    for i in range(len(pip) - 1): 
+        print(f" {RED}{pip[i]}{RESET} {url.get(keys[i], not_fo)} ")
+        
+
+    print(f" {RED}{pip[-1]}{RESET} {open_pd} ")
     print(f"╚{'═' * width}╝")
 
     ba = fade.purpleblue("back to home...")
@@ -30,15 +45,15 @@ def ip_info():
     os.system('cls' if os.name == 'nt' else 'clear')
     
 def phoneluixibouffon():
-    n = input("[+] Enter number (+33 XXX): ") or "+33 644637111"
+    n = input("[+] Enter number (+33 XXX): ") or "+33 0644637111"
     
     try:
         np = phonenumbers.parse(n)
 
-
         if not phonenumbers.is_valid_number(np):
             print("Number is not valid")
             return
+
 
         if not phonenumbers.is_possible_number(np):
             print("Number is not possible")
@@ -46,6 +61,7 @@ def phoneluixibouffon():
 
         os.system(f"ignorant {n}")  
         time.sleep(2)  
+
 
         cr = phonenumbers.region_code_for_number(np)
         op = carrier.name_for_number(np, "fr")
@@ -55,46 +71,51 @@ def phoneluixibouffon():
         tn = phonenumbers.number_type(np)
         tz = timezone.time_zones_for_number(np)
         tz_str = ', '.join(tz)
+
+        pnum = [
+            "location: ", "region: ", "time Zone: ", "operator: ", 
+            "valid Number: ", "possible number: ", "international format: ", 
+            "mobile format: ", "original number: ", "E.164 Format: ", 
+            "country code: ", "local number: ", "type: "
+        ]
         
-  
-        pnum = ["location: ", "region: ", "time Zone: ", "operator: ", "valid Number: ", 
-                "possible number: ", "international format: ", "mobile format: ", 
-                "original number: ", "E.164 Format: ", "fountry fode: ", "local number: "]
-        
+
         width = 50
         RED = "\033[91m"
         RESET = "\033[0m"
 
         print(f"╔{'═' * width}╗")
         print("")
-        print(f"{RED}{pnum[0]}{RESET}{em}")
-        print(f"{RED}{pnum[1]}{RESET}{cr}")
-        print(f"{RED}{pnum[2]}{RESET}{tz_str}")
-        print(f"{RED}{pnum[3]}{RESET}{op}")
-        print(f"{RED}{pnum[4]}{RESET}{str(phonenumbers.is_valid_number(np))}")
-        print(f"{RED}{pnum[5]}{RESET}{str(phonenumbers.is_possible_number(np))}")
-        print(f"{RED}{pnum[6]}{RESET}{fi}")
-        print(f"{RED}{pnum[7]}{RESET}{fm}")
-        print(f"{RED}{pnum[8]}{RESET}{str(np.national_number)}")
-        print(f"{RED}{pnum[9]}{RESET}{phonenumbers.format_number(np, phonenumbers.PhoneNumberFormat.E164)}")
-        print(f"{RED}{pnum[10]}{RESET}{str(np.country_code)}")
-        print(f"{RED}{pnum[11]}{RESET}{str(np.national_number)}")
+        print(f" {RED}{pnum[0]}{RESET}{em} ")
+        print(f" {RED}{pnum[1]}{RESET}{cr} ")
+        print(f" {RED}{pnum[2]}{RESET}{tz_str} ")
+        print(f" {RED}{pnum[3]}{RESET}{op} ")
+        print(f" {RED}{pnum[4]}{RESET}{str(phonenumbers.is_valid_number(np))} ")
+        print(f" {RED}{pnum[5]}{RESET}{str(phonenumbers.is_possible_number(np))} ")
+        print(f" {RED}{pnum[6]}{RESET}{fi} ")
+        print(f" {RED}{pnum[7]}{RESET}{fm} ")
+        print(f" {RED}{pnum[8]}{RESET}{str(np.national_number)} ")
+        print(f" {RED}{pnum[9]}{RESET}{phonenumbers.format_number(np, phonenumbers.PhoneNumberFormat.E164)} ")
+        print(f" {RED}{pnum[10]}{RESET}{str(np.country_code)} ")
+        print(f" {RED}{pnum[11]}{RESET}{str(np.national_number)} ")
+
+        if tn == phonenumbers.PhoneNumberType.MOBILE:
+            print(f" {RED}{pnum[12]}{RESET}mobile number")
+        elif tn == phonenumbers.PhoneNumberType.FIXED_LINE:
+            print(f" {RED}{pnum[12]}{RESET}fixed line number")
+        else:
+            print(f" {RED}{pnum[12]}{RESET}not found")
+        
         print("")
         print(f"╚{'═' * width}╝")
 
-        if tn == phonenumbers.PhoneNumberType.MOBILE:
-            print("Type: mobile number")
-        elif tn == phonenumbers.PhoneNumberType.FIXED_LINE:
-            print("Type: fixed line number")
-        else:
-            print("Type: not Found")
-        
         ba = fade.pinkred("back to home...")
         input(ba)
         os.system('cls' if os.name == 'nt' else 'clear')  
 
     except phonenumbers.phonenumberutil.NumberParseException as e:
         print(f"Error: invalid number format")
+    
     except Exception as e:
         print(f"Error: {str(e)}")
 
@@ -113,13 +134,15 @@ def menu():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         me = "code by ovax | insta banaxou"
+        vs = fade.greenblue("v1.1")
+        R = "\033[0m"
         banner = f"""
    ██╗███╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗   ██╗██╗  ██╗    [small  osint/tool]
    ██║████╗  ██║██╔════╝██╔═══██╗████╗  ██║╚██╗ ██╔╝╚██╗██╔╝    1 [IP info]
    ██║██╔██╗ ██║█████╗  ██║   ██║██╔██╗ ██║ ╚████╔╝  ╚███╔╝     2 [EMAIL info] 
    ██║██║╚██╗██║██╔══╝  ██║   ██║██║╚██╗██║  ╚██╔╝   ██╔██╗     3 [NUM info]
-   ██║██║ ╚████║██║     ╚██████╔╝██║ ╚████║   ██║   ██╔╝ ██╗
-   ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝
+   ██║██║ ╚████║██║     ╚██████╔╝██║ ╚████║   ██║   ██╔╝ ██╗     
+   ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝     {vs}{R}
                                                                            | 0 exit |
      {me}
 """
