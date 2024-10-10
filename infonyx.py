@@ -14,8 +14,8 @@ def ip_info():
     url = requests.get(f"https://ipinfo.io/{ipl}/json").json()
     not_f = "not found"
     not_fo = fade.purplepink(not_f)
-    pip = ["IP:", "Hostname:", "City:", "Region:", "Location:", "Country:", "Postal:", "ISP:", "Time zone:", "Open Ports:"]
-    keys = ["ip", "hostname","city", "region", "loc", "country", "postal", "org","timezone"]
+    pip = ["IP:", "Hostname:","Anycast:", "City:", "Region:", "Location:", "Country:", "Postal:", "ISP:", "Time zone:", "Open Ports:"]
+    keys = ["ip", "hostname","anycast","city", "region", "loc", "country", "postal", "org","timezone"]
 
     width = 50
 
