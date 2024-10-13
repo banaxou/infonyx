@@ -1,5 +1,5 @@
  **Infonyx** 
-
+MIT License
 ---
 
 ### **Licence d'Infonyx**
