@@ -12,12 +12,19 @@ git clone https://github.com/banaxou/infonyx
 cd infonyx
 bash linux.sh
 ```
+##  termux 
+```bash
+git clone https://github.com/banaxou/infonyx
+cd infonyx
+bash termux.sh
+```
 ## 🪟 windows
 ```bash
 git clone https://github.com/banaxou/infonyx
 cd infonyx
 start windows.bat
 ```
+
 
 ##  🟠 start 
 ```python
@@ -32,5 +39,4 @@ python infonyx.py
 - 🛠️ Search for email details and use the Holehe tool
 - ![holehe](https://github.com/megadose/holehe)
 - ![ignorant](https://github.com/megadose/ignorant)
-- # **update today 11:30**
-- **termux soon/1.2**
+
