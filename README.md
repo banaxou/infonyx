@@ -1,6 +1,7 @@
 # 🔎 Infonyx - OSINT Tool
 
-![Menu](menu.png)
+![menu](menu.png)
+![tmx](ifx.png)
 
 
 ## 🖥️ install python
