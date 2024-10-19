@@ -32,5 +32,5 @@ python infonyx.py
 - 🛠️ Search for email details and use the Holehe tool
 - ![holehe](https://github.com/megadose/holehe)
 - ![ignorant](https://github.com/megadose/ignorant)
-- # **update soon !**
+- # **update today 11:30**
 - **termux soon/1.2**
