@@ -1,23 +1,11 @@
 # 🔎 Infonyx - OSINT Tool
-
+# windows/linux version
 ![menu](menu.png)
-![tmx](ifx.png)
-
-
-## 🖥️ install python
-- 🐍 **https://www.python.org/downloads/**
-
 ## 🐧 linux
 ```bash 
 git clone https://github.com/banaxou/infonyx
 cd infonyx
 bash linux.sh
-```
-##  termux 
-```bash
-git clone https://github.com/banaxou/infonyx
-cd infonyx
-bash termux.sh
 ```
 ## 🪟 windows
 ```bash
@@ -25,12 +13,23 @@ git clone https://github.com/banaxou/infonyx
 cd infonyx
 start windows.bat
 ```
+# termux/mobile version
+![tmx](ifx.png)
 
-
+##  termux 
+```bash
+git clone https://github.com/banaxou/infonyx
+cd infonyx
+bash termux.sh
+```
 ##  🟠 start 
 ```python
 python infonyx.py
 ```
+## 🖥️ install python
+- 🐍 **https://www.python.org/downloads/**
+
+
 ---
 ## **Infonyx by ovax**
 ## ⚙️ Features
