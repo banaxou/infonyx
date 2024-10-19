@@ -1,4 +1,4 @@
-# 🔎 Infonyx - OSINT Tool kerson est gay
+# 🔎 Infonyx - OSINT Tool 
 # 💻windows/linux version
 ![menu](menu.png)
 ## 🐧 linux
