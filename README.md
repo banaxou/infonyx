@@ -37,6 +37,6 @@ python infonyx.py
 - 🔍 Retrieve information about phone numbers
 - 🌐 Collect IP information, including identifying open ports
 - 🛠️ Search for email details and use the Holehe tool
-- ![holehe](https://github.com/megadose/holehe)
-- ![ignorant](https://github.com/megadose/ignorant)
+- [holehe](https://github.com/megadose/holehe)
+- [ignorant](https://github.com/megadose/ignorant)
 
