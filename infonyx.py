@@ -2,7 +2,6 @@ import os
 import time
 import fade
 import requests
-import socket
 import phonenumbers
 from phonenumbers import carrier, geocoder, timezone
 
@@ -21,22 +20,19 @@ def ip_info():
 
     print(f"╔{'═' * width}╗")
     open_p = []
-    port_r = range(0, 65535) 
 
-    for port in port_r:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            sock.settimeout(1)  
-            result = sock.connect_ex((ipl, port))  
-            if result == 0:  
-                open_p.append(port)
-
+    nmapx = os.popen(f"nmap -p- --open {ipl}").read()
+    lines = nmapx.split("\n")
+    for line in lines:
+        if "/tcp" in line and "open" in line:
+            port = line.split("/")[0].strip()
+            open_p.append(port)
 
     open_pd = ', '.join(map(str, open_p)) if open_p else "None"
 
-    for i in range(len(pip) - 1): 
+    for i in range(len(pip) - 1):
         print(f" {RED}{pip[i]}{RESET} {url.get(keys[i], not_fo)} ")
         
-
     print(f" {RED}{pip[-1]}{RESET} {open_pd} ")
     print(f"╚{'═' * width}╝")
 
@@ -134,7 +130,7 @@ def menu():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         me = "code by ovax | insta banaxou"
-        vs = fade.greenblue("v1.1")
+        vs = fade.greenblue("v1.2")
         R = "\033[0m"
         banner = f"""
    ██╗███╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗   ██╗██╗  ██╗    [small  osint/tool]
