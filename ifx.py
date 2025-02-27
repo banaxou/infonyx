@@ -23,7 +23,9 @@ def ip_info():
     open_p = []
     for i in range(len(pip) - 1):
         print(f" {RED}{pip[i]}{RESET} {url.get(keys[i], not_fo)} ")
-    nmapx = subprocess.run(["nmap", "-p-", "--open", ipl], capture_output=True, text=True).stdout
+    nmapx = subprocess.run(["nmap", "-p-", "--open", ipl],
+       print("port scan ▼")
+ capture_output=True, text=True).stdout
     lines = nmapx.split("\n")
     for line in lines:
         if "/tcp" in line and "open" in line:
