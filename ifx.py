@@ -25,8 +25,8 @@ def ip_info():
         print(f" {RED}{pip[i]}{RESET} {url.get(keys[i], not_fo)} ")
     print(f"╚{'═' * width}╝")
     nmapx = subprocess.run(["nmap", "-p-", "--open", ipl],
-       print(f"╔{'═' * width}╗")
-       print("port scan.. ▼")
+    print(f"╔{'═' * width}╗")
+    print("port scan.. ▼")
  capture_output=True, text=True).stdout
     lines = nmapx.split("\n")
     for line in lines:
