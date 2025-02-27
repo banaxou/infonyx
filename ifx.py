@@ -3,6 +3,7 @@ import time
 import fade
 import requests
 import socket
+import subprocess 
 import phonenumbers
 from phonenumbers import carrier, geocoder, timezone
 def ip_info():
