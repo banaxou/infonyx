@@ -13,7 +13,7 @@ git clone https://github.com/banaxou/infonyx
 cd infonyx
 start windows.bat
 ```
-# 📱termux/mobile version 1.3  bug fixe
+# 📱termux/mobile version 1.3 
 ![tmx](ifx.png)
 
 ## 📱termux 
