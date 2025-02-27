@@ -13,26 +13,23 @@ def ip_info():
     url = requests.get(f"https://ipinfo.io/{ipl}/json").json()
     not_f = "not found"
     not_fo = fade.purplepink(not_f)
-    pip = ["IP:", "Hostname:","City:", "Region:", "Location:", "Country:", "Postal:", "ISP:", "Time zone:", "Anycast","Open Ports:"]
-    keys = ["ip", "hostname","city", "region", "loc", "country", "postal", "org","timezone","anycast"]
+    pip = ["IP:", "Hostname:", "City:", "Region:", "Location:", "Country:", "Postal:", "ISP:", "Time zone:", "Anycast", "Open Ports:"]
+    keys = ["ip", "hostname", "city", "region", "loc", "country", "postal", "org", "timezone", "anycast"]
 
     width = 50
 
     print(f"╔{'═' * width}╗")
     open_p = []
-
-    nmapx = os.popen(f"nmap -p- --open {ipl}").read()
+    for i in range(len(pip) - 1):
+        print(f" {RED}{pip[i]}{RESET} {url.get(keys[i], not_fo)} ")
+    nmapx = subprocess.run(["nmap", "-p-", "--open", ipl], capture_output=True, text=True).stdout
     lines = nmapx.split("\n")
     for line in lines:
         if "/tcp" in line and "open" in line:
             port = line.split("/")[0].strip()
             open_p.append(port)
-
+            
     open_pd = ', '.join(map(str, open_p)) if open_p else "None"
-
-    for i in range(len(pip) - 1):
-        print(f" {RED}{pip[i]}{RESET} {url.get(keys[i], not_fo)} ")
-        
     print(f" {RED}{pip[-1]}{RESET} {open_pd} ")
     print(f"╚{'═' * width}╝")
 
