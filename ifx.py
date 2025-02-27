@@ -3,9 +3,10 @@ import time
 import fade
 import requests
 import socket
-import subprocess 
+import subprocess
 import phonenumbers
 from phonenumbers import carrier, geocoder, timezone
+
 def ip_info():
     RED = "\033[91m"
     RESET = "\033[0m"
@@ -23,17 +24,17 @@ def ip_info():
     open_p = []
     for i in range(len(pip) - 1):
         print(f" {RED}{pip[i]}{RESET} {url.get(keys[i], not_fo)} ")
-    print(f"╚{'═' * width}╝")
-    nmapx = subprocess.run(["nmap", "-p-", "--open", ipl],
+    print(f"╚{'═' * width}╝")
+
     print(f"╔{'═' * width}╗")
     print("port scan.. ▼")
- capture_output=True, text=True).stdout
+    nmapx = subprocess.run(["nmap", "-p-", "--open", ipl], capture_output=True, text=True).stdout
     lines = nmapx.split("\n")
     for line in lines:
         if "/tcp" in line and "open" in line:
             port = line.split("/")[0].strip()
             open_p.append(port)
-            
+
     open_pd = ', '.join(map(str, open_p)) if open_p else "None"
     print(f" {RED}{pip[-1]}{RESET} {open_pd} ")
     print(f"╚{'═' * width}╝")
@@ -41,9 +42,10 @@ def ip_info():
     ba = fade.purpleblue("back to home...")
     input(ba)
     os.system('cls' if os.name == 'nt' else 'clear')
+
 def phoneluixibouffon():
     n = input("[+] Enter number (+33 XXX): ") or "+33 0644637111"
-    
+
     try:
         np = phonenumbers.parse(n)
 
@@ -51,14 +53,12 @@ def phoneluixibouffon():
             print("Number is not valid")
             return
 
-
         if not phonenumbers.is_possible_number(np):
             print("Number is not possible")
             return
 
-        os.system(f"ignorant {n}")  
-        time.sleep(2)  
-
+        os.system(f"ignorant {n}")
+        time.sleep(2)
 
         cr = phonenumbers.region_code_for_number(np)
         op = carrier.name_for_number(np, "fr")
@@ -70,12 +70,11 @@ def phoneluixibouffon():
         tz_str = ', '.join(tz)
 
         pnum = [
-            "location: ", "region: ", "time Zone: ", "operator: ", 
-            "valid Number: ", "possible number: ", "international format: ", 
-            "mobile format: ", "original number: ", "E.164 Format: ", 
+            "location: ", "region: ", "time Zone: ", "operator: ",
+            "valid Number: ", "possible number: ", "international format: ",
+            "mobile format: ", "original number: ", "E.164 Format: ",
             "country code: ", "local number: ", "type: "
         ]
-        
 
         width = 50
         RED = "\033[91m"
@@ -102,30 +101,28 @@ def phoneluixibouffon():
             print(f" {RED}{pnum[12]}{RESET}fixed line number")
         else:
             print(f" {RED}{pnum[12]}{RESET}not found")
-        
+
         print("")
         print(f"╚{'═' * width}╝")
 
         ba = fade.pinkred("back to home...")
         input(ba)
-        os.system('cls' if os.name == 'nt' else 'clear')  
+        os.system('cls' if os.name == 'nt' else 'clear')
 
-    except phonenumbers.phonenumberutil.NumberParseException as e:
-        print(f"Error: invalid number format")
-    
+    except phonenumbers.phonenumberutil.NumberParseException:
+        print("Error: invalid number format")
+
     except Exception as e:
         print(f"Error: {str(e)}")
 
 def mail_info():
     e_input = input("[+] enter e-mail address : ") or "google@gmail.com"
-  
+
     email = f"holehe {e_input}"
     os.system(email)
     ba = fade.pinkred("back to home...")
     input(ba)
-    os.system('cls' if os.name == 'nt' else 'clear') 
-
-
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def menu():
     while True:
@@ -138,7 +135,7 @@ def menu():
 
      ██╗ ███████╗██╗  ██╗   [small osint/tool]
      ██║ ██╔════╝╚██╗██╔╝  1 [IP INFO]
-     ██║ █████╗   ╚███╔╝   2 [EMAIL INFO] 
+     ██║ █████╗   ╚███╔╝   2 [EMAIL INFO]
      ██║ ██╔══╝   ██╔██╗   3 [NUMBER INFO]
      ██║ ██║     ██╔╝ ██╗
      ╚═╝ ╚═╝     ╚═╝  ╚═╝
@@ -146,7 +143,7 @@ def menu():
 
 
 {vs}{R}
-            
+
      {me}
 """
 
@@ -160,7 +157,7 @@ def menu():
         elif choice == "2":
             mail_info()
         elif choice == "3":
-            phoneluixibouffon()  
+            phoneluixibouffon()
         elif choice == "0":
             os.system('cls' if os.name == 'nt' else 'clear')
             os.system('cowsay -t "code by ovax"')
