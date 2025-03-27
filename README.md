@@ -40,3 +40,6 @@ python infonyx.py
 - [ignorant](https://github.com/megadose/ignorant)
 
 ## **Infonyx by ovax**
+#  ☄️ Support Me
+
+Your donations help fund my open-source projects:
