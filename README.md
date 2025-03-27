@@ -31,7 +31,6 @@ python infonyx.py
 
 
 ---
-## **Infonyx by ovax**
 ## ⚙️ Features
 
 - 🔍 Retrieve information about phone numbers
@@ -40,3 +39,4 @@ python infonyx.py
 - [holehe](https://github.com/megadose/holehe)
 - [ignorant](https://github.com/megadose/ignorant)
 
+## **Infonyx by ovax**
