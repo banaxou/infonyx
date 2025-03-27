@@ -39,7 +39,10 @@ python infonyx.py
 - [holehe](https://github.com/megadose/holehe)
 - [ignorant](https://github.com/megadose/ignorant)
 
-## **Infonyx by ovax**
+## **Infonyx by ovax 🪷**
 #  ☄️ Support Me
 
 Your donations help fund my open-source projects:
+
+### <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" width="20" height="20"> Ethereum  
+[`0x190feaDcd1b19F0bc3Faa39A0d5904E072CCA627`](https://etherscan.io/address/0x190feaDcd1b19F0bc3Faa39A0d5904E072CCA627)
