@@ -4,7 +4,7 @@ MIT License
 
 ### **Licence d'Infonyx**
 
-**Copyright © 2024 Ovaxou**
+**Copyright © 2025 Ovaxou**
 
 **Autorisation** : Je permets à toute personne d'utiliser, de copier, de modifier, de fusionner, de publier et de distribuer ce logiciel sans restrictions, à condition d'inclure le copyright et la mention de cette licence dans toutes les copies ou parties significatives du logiciel.
 
@@ -14,7 +14,7 @@ MIT License
 
 ### **Infonyx License**
 
-**Copyright © 2024 Ovaxou**
+**Copyright © 2025 Ovaxou**
 
 **Authorization**: I permit anyone to use, copy, modify, merge, publish, and distribute this software without restrictions, provided that they include the copyright notice and this license in all copies or substantial portions of the software.
 
