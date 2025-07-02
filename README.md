@@ -1,5 +1,5 @@
 # 🔎 Infonyx - OSINT Tool 
-# 💻windows/linux version 1.2
+# 💻windows/linux version 1.2 | 1.3 coming soon
 ![menu](menu.png)
 ## 🐧 linux
 ```bash 
@@ -13,7 +13,7 @@ git clone https://github.com/banaxou/infonyx
 cd infonyx
 start windows.bat
 ```
-# 📱termux/mobile version 1.3 
+# 📱termux/mobile version 1.3 | 1.4 coming soon
 ![tmx](ifx.png)
 
 ## 📱termux 
