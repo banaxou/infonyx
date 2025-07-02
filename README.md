@@ -64,9 +64,3 @@ Your support helps keep this tool alive and open source!
 
 > **infonyx 1.2**
 ---
-
-
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg" width="20"> 
- 
-[bc1pch0t574x0xpr6vad5ru0862kyw9le8qv2ja3ufdpnhz4hfcp54ksn2guqy](https://blockchair.com/bitcoin/address/bc1pch0t574x0xpr6vad5ru0862kyw9le8qv2ja3ufdpnhz4hfcp54ksn2guqy)
