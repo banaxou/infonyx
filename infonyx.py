@@ -2,26 +2,36 @@ import os
 import time
 import fade
 import requests
+import subprocess
 import phonenumbers
+import json
 from phonenumbers import carrier, geocoder, timezone
 
-def ip_info():
-    RED = "\033[91m"
-    RESET = "\033[0m"
-    ipl = input("[+] Enter IP: ")
+R = "\033[91m"
+r = "\033[0m"
 
+def ip_info():
+    ipl = input(f"[{R}+{r}] Enter IP: ")
+    print("")
     url = requests.get(f"https://ipinfo.io/{ipl}/json").json()
     not_f = "not found"
     not_fo = fade.purplepink(not_f)
-    pip = ["IP:", "Hostname:","City:", "Region:", "Location:", "Country:", "Postal:", "ISP:", "Time zone:", "Anycast","Open Ports:"]
-    keys = ["ip", "hostname","city", "region", "loc", "country", "postal", "org","timezone","anycast"]
-
+    pip = ["IP:", "Hostname:", "City:", "Region:", "Location:", "Country:", "Postal:", "ISP:", "Time zone:", "Anycast", "Open Ports:"]
+    keys = ["ip", "hostname", "city", "region", "loc", "country", "postal", "org", "timezone", "anycast"]
     width = 50
 
     print(f"╔{'═' * width}╗")
-    open_p = []
+    info = {}
+    for i in range(len(keys)):
+        value = url.get(keys[i], not_fo)
+        info[keys[i]] = value
+        print(f" {R}{pip[i]}{r} {value} ")
+    print(f"╚{'═' * width}╝")
 
-    nmapx = os.popen(f"nmap -p- --open {ipl}").read()
+    print(f"╔{'═' * width}╗")
+    print("port scan.. ▼")
+    open_p = []
+    nmapx = subprocess.run(["nmap", "-p-", "--open", ipl], capture_output=True, text=True).stdout
     lines = nmapx.split("\n")
     for line in lines:
         if "/tcp" in line and "open" in line:
@@ -29,19 +39,20 @@ def ip_info():
             open_p.append(port)
 
     open_pd = ', '.join(map(str, open_p)) if open_p else "None"
-
-    for i in range(len(pip) - 1):
-        print(f" {RED}{pip[i]}{RESET} {url.get(keys[i], not_fo)} ")
-        
-    print(f" {RED}{pip[-1]}{RESET} {open_pd} ")
+    print(f" {R}{pip[-1]}{r} {open_pd} ")
     print(f"╚{'═' * width}╝")
 
+    info["port"] = open_p
+
     ba = fade.purpleblue("back to home...")
+    ajson = f"ip_{ipl}.json"
+    with open(ajson, "w", encoding="utf-8") as jsson:
+        json.dump(info, jsson, ensure_ascii=False, indent=4)
     input(ba)
     os.system('cls' if os.name == 'nt' else 'clear')
     
 def phoneluixibouffon():
-    n = input("[+] Enter number (+33 XXX): ") or "+33 0644637111"
+    n = input(f"[{R}+{r}] Enter number (+33 XXX): ") or "+33 0644637111"
     
     try:
         np = phonenumbers.parse(n)
@@ -74,33 +85,29 @@ def phoneluixibouffon():
             "mobile format: ", "original number: ", "E.164 Format: ", 
             "country code: ", "local number: ", "type: "
         ]
-        
-
         width = 50
-        RED = "\033[91m"
-        RESET = "\033[0m"
 
         print(f"╔{'═' * width}╗")
         print("")
-        print(f" {RED}{pnum[0]}{RESET}{em} ")
-        print(f" {RED}{pnum[1]}{RESET}{cr} ")
-        print(f" {RED}{pnum[2]}{RESET}{tz_str} ")
-        print(f" {RED}{pnum[3]}{RESET}{op} ")
-        print(f" {RED}{pnum[4]}{RESET}{str(phonenumbers.is_valid_number(np))} ")
-        print(f" {RED}{pnum[5]}{RESET}{str(phonenumbers.is_possible_number(np))} ")
-        print(f" {RED}{pnum[6]}{RESET}{fi} ")
-        print(f" {RED}{pnum[7]}{RESET}{fm} ")
-        print(f" {RED}{pnum[8]}{RESET}{str(np.national_number)} ")
-        print(f" {RED}{pnum[9]}{RESET}{phonenumbers.format_number(np, phonenumbers.PhoneNumberFormat.E164)} ")
-        print(f" {RED}{pnum[10]}{RESET}{str(np.country_code)} ")
-        print(f" {RED}{pnum[11]}{RESET}{str(np.national_number)} ")
+        print(f" {R}{pnum[0]}{r}{em} ")
+        print(f" {R}{pnum[1]}{r}{cr} ")
+        print(f" {R}{pnum[2]}{r}{tz_str} ")
+        print(f" {R}{pnum[3]}{r}{op} ")
+        print(f" {R}{pnum[4]}{r}{str(phonenumbers.is_valid_number(np))} ")
+        print(f" {R}{pnum[5]}{r}{str(phonenumbers.is_possible_number(np))} ")
+        print(f" {R}{pnum[6]}{r}{fi} ")
+        print(f" {R}{pnum[7]}{r}{fm} ")
+        print(f" {R}{pnum[8]}{r}{str(np.national_number)} ")
+        print(f" {R}{pnum[9]}{r}{phonenumbers.format_number(np, phonenumbers.PhoneNumberFormat.E164)} ")
+        print(f" {R}{pnum[10]}{r}{str(np.country_code)} ")
+        print(f" {R}{pnum[11]}{r}{str(np.national_number)} ")
 
         if tn == phonenumbers.PhoneNumberType.MOBILE:
-            print(f" {RED}{pnum[12]}{RESET}mobile number")
+            print(f" {R}{pnum[12]}{r}mobile number")
         elif tn == phonenumbers.PhoneNumberType.FIXED_LINE:
-            print(f" {RED}{pnum[12]}{RESET}fixed line number")
+            print(f" {R}{pnum[12]}{r}fixed line number")
         else:
-            print(f" {RED}{pnum[12]}{RESET}not found")
+            print(f" {R}{pnum[12]}{r}not found")
         
         print("")
         print(f"╚{'═' * width}╝")
@@ -116,7 +123,7 @@ def phoneluixibouffon():
         print(f"Error: {str(e)}")
 
 def mail_info():
-    e_input = input("[+] enter e-mail address : ") or "google@gmail.com"
+    e_input = input(f"[{R}+{r}] enter e-mail address : ") or "google@gmail.com"
   
     email = f"holehe {e_input}"
     os.system(email)
@@ -130,15 +137,14 @@ def menu():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         me = "code by ovax | insta banaxou"
-        vs = fade.greenblue("v1.2")
-        R = "\033[0m"
-        banner = f"""
-   ██╗███╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗   ██╗██╗  ██╗    [small  osint/tool]
+        vs = fade.greenblue("v1.3")     
+        banner = f"""                                           
+   ██╗███╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗   ██╗██╗  ██╗    [small osint/tool]
    ██║████╗  ██║██╔════╝██╔═══██╗████╗  ██║╚██╗ ██╔╝╚██╗██╔╝    1 [IP info]
    ██║██╔██╗ ██║█████╗  ██║   ██║██╔██╗ ██║ ╚████╔╝  ╚███╔╝     2 [EMAIL info] 
    ██║██║╚██╗██║██╔══╝  ██║   ██║██║╚██╗██║  ╚██╔╝   ██╔██╗     3 [NUM info]
    ██║██║ ╚████║██║     ╚██████╔╝██║ ╚████║   ██║   ██╔╝ ██╗     
-   ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝     {vs}{R}
+   ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝     {vs}{r}
                                                                            | 0 exit |
      {me}
 """
@@ -146,7 +152,7 @@ def menu():
         ban = fade.fire(banner)
 
         print(ban)
-        choice = input("Enter a choice : ")
+        choice = input(f"{R}>{r} enter a choice: ")
 
         if choice == "1":
             ip_info()
