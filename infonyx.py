@@ -1,3 +1,4 @@
+# code by ovax 
 import os
 import time
 import fade
@@ -15,42 +16,72 @@ def ip_info():
     print("")
     url = requests.get(f"https://ipinfo.io/{ipl}/json").json()
     not_f = "not found"
-    not_fo = fade.purplepink(not_f)
     pip = ["IP:", "Hostname:", "City:", "Region:", "Location:", "Country:", "Postal:", "ISP:", "Time zone:", "Anycast", "Open Ports:"]
     keys = ["ip", "hostname", "city", "region", "loc", "country", "postal", "org", "timezone", "anycast"]
+    urlx = f"https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-ip?ip={ipl}"
+    res = requests.get(urlx)
     width = 50
 
     print(f"╔{'═' * width}╗")
     info = {}
     for i in range(len(keys)):
-        value = url.get(keys[i], not_fo)
+        value = url.get(keys[i], not_f)
         info[keys[i]] = value
         print(f" {R}{pip[i]}{r} {value} ")
     print(f"╚{'═' * width}╝")
 
-    print(f"╔{'═' * width}╗")
-    print("port scan.. ▼")
-    open_p = []
-    nmapx = subprocess.run(["nmap", "-p-", "--open", ipl], capture_output=True, text=True).stdout
-    lines = nmapx.split("\n")
-    for line in lines:
-        if "/tcp" in line and "open" in line:
-            port = line.split("/")[0].strip()
-            open_p.append(port)
+    d = str(input("Do you want to check if data is compromised and scan IP port? (y/n) :")).strip().lower()
+    
+    if d == "y":
+        if res.status_code == 200:
+            try:
+                data = res.json()
 
-    open_pd = ', '.join(map(str, open_p)) if open_p else "None"
-    print(f" {R}{pip[-1]}{r} {open_pd} ")
-    print(f"╚{'═' * width}╝")
+                if 'stealers' in data and not data['stealers']:
+                    print("data has not compromised")
+                else:
+                    print("status code:", res.status_code)
+                    print(f"╔{'═' * width}╗")
+                    print(json.dumps(data, indent=2))
+                    print(f"╚{'═' * width}╝")
 
-    info["port"] = open_p
+            except ValueError:
+                print("no response json")
 
-    ba = fade.purpleblue("back to home...")
+        elif res.status_code != 200:
+            print("Error request")
+            # menu()  
+
+        print(f"╔{'═' * width}╗")
+        print("port scan.. ▼")
+        open_p = []
+        try:
+            nmapx = subprocess.run(["nmap", "-p-", "--open", ipl], capture_output=True, text=True).stdout
+            lines = nmapx.split("\n")
+            for line in lines:
+                if "/tcp" in line and "open" in line:
+                    port = line.split("/")[0].strip()
+                    open_p.append(port)
+        except Exception as e:
+            open_p = ["nmap error"]
+
+        open_pd = ', '.join(map(str, open_p)) if open_p else "None"
+        print(f" {R}{pip[-1]}{r} {open_pd} ")
+        print(f"╚{'═' * width}╝")
+
+        info["port"] = open_p
+
+    elif d == "n" or d == "":
+        print("back to home...")
+
     ajson = f"ip_{ipl}.json"
     with open(ajson, "w", encoding="utf-8") as jsson:
         json.dump(info, jsson, ensure_ascii=False, indent=4)
-    input(ba)
+
+    input("press enter to continue...")
     os.system('cls' if os.name == 'nt' else 'clear')
-    
+
+
 def phoneluixibouffon():
     n = input(f"[{R}+{r}] Enter number (+33 XXX): ") or "+33 0644637111"
     
@@ -60,7 +91,6 @@ def phoneluixibouffon():
         if not phonenumbers.is_valid_number(np):
             print("Number is not valid")
             return
-
 
         if not phonenumbers.is_possible_number(np):
             print("Number is not possible")
@@ -111,7 +141,6 @@ def phoneluixibouffon():
         
         print("")
         print(f"╚{'═' * width}╝")
-
         ba = fade.pinkred("back to home...")
         input(ba)
         os.system('cls' if os.name == 'nt' else 'clear')  
@@ -127,6 +156,22 @@ def mail_info():
   
     email = f"holehe {e_input}"
     os.system(email)
+    url = f"https://cavalier.hudsonrock.com/api/json/v2/osint-tools/search-by-email?email={e_input}"
+    res = requests.get(url)  
+    if res.status_code == 200:
+        try:
+            data = res.json()
+
+            if 'message' in data and "not associated with a computer infected" in data['message']:
+                print("data has not compromised")
+            else:
+                print("status code: ", res.status_code)
+                print(json.dumps(data, indent=2))
+        except ValueError :
+            print("no response json")
+    elif res.status_code != 200:
+        print("Error request")
+        
     ba = fade.pinkred("back to home...")
     input(ba)
     os.system('cls' if os.name == 'nt' else 'clear') 
@@ -137,12 +182,12 @@ def menu():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         me = "code by ovax | insta banaxou"
-        vs = fade.greenblue("v1.3")     
+        vs = fade.greenblue("v1.3.1")     
         banner = f"""                                           
-   ██╗███╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗   ██╗██╗  ██╗    [small osint/tool]
-   ██║████╗  ██║██╔════╝██╔═══██╗████╗  ██║╚██╗ ██╔╝╚██╗██╔╝    1 [IP info]
-   ██║██╔██╗ ██║█████╗  ██║   ██║██╔██╗ ██║ ╚████╔╝  ╚███╔╝     2 [EMAIL info] 
-   ██║██║╚██╗██║██╔══╝  ██║   ██║██║╚██╗██║  ╚██╔╝   ██╔██╗     3 [NUM info]
+   ██╗███╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗   ██╗██╗  ██╗    
+   ██║████╗  ██║██╔════╝██╔═══██╗████╗  ██║╚██╗ ██╔╝╚██╗██╔╝     1 : IP info
+   ██║██╔██╗ ██║█████╗  ██║   ██║██╔██╗ ██║ ╚████╔╝  ╚███╔╝      2 : EMAIL info 
+   ██║██║╚██╗██║██╔══╝  ██║   ██║██║╚██╗██║  ╚██╔╝   ██╔██╗      3 : NUM info
    ██║██║ ╚████║██║     ╚██████╔╝██║ ╚████║   ██║   ██╔╝ ██╗     
    ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝     {vs}{r}
                                                                            | 0 exit |
@@ -162,7 +207,7 @@ def menu():
             phoneluixibouffon()  
         elif choice == "0":
             os.system('cls' if os.name == 'nt' else 'clear')
-            os.system('cowsay -t "code by ovax"')
+            os.system('cowsay -t "code by ovax "infonyx +" soon "')
             time.sleep(3)
             break
         else:
