@@ -1,5 +1,5 @@
 # 🔎 Infonyx - OSINT Tool 
-# 💻windows/linux version 1.3 | 1.3.1 soon big update and big project
+# 💻windows/linux version 1.3.1 big update ! and big project soon
 ![menu](menu.png)
 ## 🐧 linux
 ```bash 
