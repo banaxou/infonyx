@@ -14,7 +14,7 @@ cd infonyx
 start windows.bat
 ```
 # 📱termux/mobile version 1.3 | 1.3.1 soon 
-![tmx](ifx.png)
+![tmx](img/ifx.png)
 
 ## 📱termux 
 ```bash
