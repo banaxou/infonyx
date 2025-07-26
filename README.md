@@ -1,6 +1,6 @@
 # 🔎 Infonyx - OSINT Tool 
 # 💻windows/linux version 1.3.1 big update ! and big project soon
-![menu](menu.png)
+![menu](img/menu.png)
 ## 🐧 linux
 ```bash 
 git clone https://github.com/banaxou/infonyx
