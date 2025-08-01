@@ -1,0 +1,7 @@
+requests
+holehe
+fade
+ignorant
+python-nmap
+cowsay
+phonenumbers
