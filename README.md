@@ -11,7 +11,8 @@ bash linux.sh
 ```bash
 git clone https://github.com/banaxou/infonyx
 cd infonyx
-start windows.bat
+pip install -r requirements.txt
+python infonyx.py
 ```
 # 📱termux/mobile version 1.3 | 1.3.1 soon 
 ![tmx](img/ifx.png)
